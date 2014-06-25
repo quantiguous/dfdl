@@ -61,7 +61,6 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
 					<th>Pattern</th>
 					<th>Default Value</th>
 					<th>Sample Value</th>
-					<th>Fixed Value</th>
 					<th>Notes</th>
 				</tr>
 			</thead>
@@ -109,7 +108,6 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
 						</td>
 						<td><xsl:value-of select="@ibmDfdlExtn:defaultValue"/></td>						
 						<td><xsl:value-of select="@ibmDfdlExtn:sampleValue"/></td>
-						<td><xsl:value-of select="@fixed"/></td>
 						<td><xsl:value-of select="xsd:annotation"/></td>
 					</tr>
 				</xsl:for-each>
