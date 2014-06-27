@@ -16,14 +16,14 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
 						width: 100%;
 						border-collapse: collapse;
 					}
-					
+
 
 					table td, table th, table caption {
 						font-size: 1em;
 						border: 1px solid #98bf21;
 						padding: 3px 7px 2px 7px;
 					}
-					
+
 					table th {
 						font-size: 1.1em;
 						text-align: left;
@@ -32,7 +32,7 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
 						background-color: #A7C942;
 						color: #ffffff;
 					}
-					
+
 					table tr.alt td {
 						color: #000000;
 						background-color: #EAF2D3;
@@ -57,11 +57,11 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
 					<th>DataType</th>
 					<th>MinLength/MinValue</th>
 					<th>MaxLength/MaxValue</th>
-					<th>Enumeration</th>
 					<th>Pattern</th>
 					<th>Default Value</th>
 					<th>Sample Value</th>
 					<th>Notes</th>
+					<th>Enumeration</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -72,10 +72,10 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
                 <xsl:when test="@minOccurs = 0"/>
                 <xsl:otherwise>&#10003;</xsl:otherwise>
               </xsl:choose>
-            </td>            
+            </td>
             <td>
               <xsl:choose>
-                <xsl:when test="@fixed"><xsl:value-of select="@fixed"/></xsl:when>                
+                <xsl:when test="@fixed"><xsl:value-of select="@fixed"/></xsl:when>
                 <xsl:when test="@minOccurs = 0 and xsd:simpleType/xsd:restriction/xsd:maxLength/@value = 0">(blank)</xsl:when>
               </xsl:choose>
             </td>
@@ -91,6 +91,14 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
 							<xsl:if test="xsd:simpleType/xsd:restriction/xsd:maxInclusive"><xsl:value-of select="concat(xsd:simpleType/xsd:restriction/xsd:maxInclusive/@value,'(inclusive)')"/></xsl:if>
 							<xsl:if test="xsd:simpleType/xsd:restriction/xsd:maxExclusive"><xsl:value-of select="concat(xsd:simpleType/xsd:restriction/xsd:maxExclusive/@value,'(exclusive)')"/></xsl:if>
 						</td>
+
+						<td>
+							<xsl:value-of select="@dfdl:textNumberPattern"/>
+							<xsl:value-of select="@dfdl:calendarPattern"/>
+						</td>
+						<td><xsl:value-of select="@ibmDfdlExtn:defaultValue"/></td>
+						<td><xsl:value-of select="@ibmDfdlExtn:sampleValue"/></td>
+						<td><xsl:value-of select="xsd:annotation"/></td>
 						<td>
 							<xsl:for-each select="xsd:simpleType/xsd:restriction/xsd:enumeration">
 								<xsl:value-of select="concat(@value,',')"/>
@@ -102,13 +110,6 @@ exclude-result-prefixes="xsd ibmDfdlExtn ibmSchExtn dfdl csv html fo">
 								<xsl:value-of select="concat('true:', @dfdl:textBooleanTrueRep)"/>
 							</xsl:if>
 						</td>
-						<td>
-							<xsl:value-of select="@dfdl:textNumberPattern"/>
-							<xsl:value-of select="@dfdl:calendarPattern"/>
-						</td>
-						<td><xsl:value-of select="@ibmDfdlExtn:defaultValue"/></td>						
-						<td><xsl:value-of select="@ibmDfdlExtn:sampleValue"/></td>
-						<td><xsl:value-of select="xsd:annotation"/></td>
 					</tr>
 				</xsl:for-each>
 			</tbody>
